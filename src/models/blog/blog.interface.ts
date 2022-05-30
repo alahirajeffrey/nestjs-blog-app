@@ -1,7 +1,7 @@
 import { User } from "../users/user.interface"
 
 export interface BlogPost{
-    id? : number
+    id? : string
     blogTitle : string
     blogPost : string
     createdAt: Date
