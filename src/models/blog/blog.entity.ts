@@ -1,9 +1,10 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import { UserEntity } from '../users/user.entity';
 
 @Entity('blog')
 export class BlogEntity{
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column()
     blogTitle: string
@@ -11,6 +12,9 @@ export class BlogEntity{
     @Column()
     blogPost: string
 
-    @Column({type: 'timestamp',  default : ()=>'CURRENT_TIMESTAMP'})
+    @CreateDateColumn()
     createdAt: Date
+
+    @ManyToOne(()=> UserEntity, (UserEntity)=> UserEntity.id)
+    author : UserEntity
 }
