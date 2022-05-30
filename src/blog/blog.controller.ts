@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { BlogPost } from 'src/models/blog.interface';
+import { BlogPost } from 'src/models/blog/blog.interface';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { BlogService } from './blog.service';
 

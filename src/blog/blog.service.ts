@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
-import { BlogEntity } from 'src/models/blog.entity';
-import { BlogPost } from 'src/models/blog.interface';
+import { BlogEntity } from 'src/models/blog/blog.entity';
+import { BlogPost } from 'src/models/blog/blog.interface';
 import { from, Observable } from 'rxjs';
 
 @Injectable()
