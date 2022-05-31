@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
-import { BlogEntity } from 'src/models/blog/blog.entity';
-import { BlogPost } from 'src/models/blog/blog.interface';
+import { BlogEntity } from 'src/blog/blog.entity';
 import { from, Observable } from 'rxjs';
+import { BlogPost } from './blog.interface';
 
 @Injectable()
 export class BlogService {
@@ -13,23 +13,19 @@ export class BlogService {
         private readonly blogRepository: Repository<BlogEntity>
     ){}
 
-    createPost(blogPost: BlogPost) : Observable <BlogPost> {
-        return from(this.blogRepository.save(blogPost)) 
+    async createBlog(blogPost: BlogPost) : Promise <BlogPost> {
+        return await this.blogRepository.save(blogPost) 
     }
 
-    findAllPosts() : Observable <BlogPost[]> {
-        return from(this.blogRepository.find())
+    async findAllBlogPosts() : Promise<BlogPost[]>{
+        return await this.blogRepository.find()
     }
 
-    findSinglePost(id: number) : Observable <BlogPost[]>{
-        return from(this.blogRepository.findByIds([id]))
+    async deleteBlog(id: number){
+        return await from(this.blogRepository.delete(id))
     }
 
-    deletePost(id: number) : Observable <DeleteResult> {
-        return from(this.blogRepository.delete(id))
-    }
-
-    updatePost(id: number, blogPost: BlogPost) : Observable <UpdateResult>{
-        return from(this.blogRepository.update(id, blogPost))
+    async updateBlog(id: number, blogPost: BlogPost) : Promise<UpdateResult>{
+        return await this.blogRepository.update(id, blogPost)
     }
 }
